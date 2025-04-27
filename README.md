@@ -1,3 +1,3 @@
 # PHP-Practice
 
-!(Portada)["Photo.png"]
+![Portada](Photo.png)
