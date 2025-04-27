@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Conexión a la base de datos
 $conexion = new mysqli("localhost", "root", "", "demo_web");
 
@@ -6,12 +6,14 @@ if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
-// Recibir datos del formulario
-$nombre = $_POST['nombre'];
+// Recibir el ID del usuario a eliminar
+$id = $_POST['id'];
 
-// Insertar en la base de datos
-$sql = "INSERT INTO usuarios (nombre) VALUES ('$nombre')";
-$conexion->query($sql);
+// Eliminar el usuario de la base de datos
+$sql = "DELETE FROM usuarios WHERE id = ?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
 
 // Mostrar la lista actualizada de usuarios
 $resultado = $conexion->query("SELECT * FROM usuarios");
