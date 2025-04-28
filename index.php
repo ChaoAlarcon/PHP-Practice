@@ -33,8 +33,12 @@ $conexion->close();
 <body>
     <h1>Usuarios</h1>
     
-    <form id="formulario">
+    <form id="formulario" action="insertar.php" method="POST">
+        <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" placeholder="Nombre" required>
+        <label for="password">Contraseña:</label>
+        <input type="password" name="password" required>
+
         <button type="submit">Agregar</button>
         
     </form>

@@ -8,20 +8,20 @@ if ($conexion->connect_error) {
 
 // Recibir datos del formulario
 $nombre = $_POST['nombre'];
+$password = $_POST['password'];
+
+if (empty($nombre) || empty($password)) {
+    die("Error: Faltan datos del formulario.");
+}
+
+// Opcional: Encriptar la contraseña antes de guardarla
+$password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 // Insertar en la base de datos
-$sql = "INSERT INTO usuarios (nombre) VALUES ('$nombre')";
+$sql = "INSERT INTO usuarios (nombre, password) VALUES ('$nombre', '$password_hash')";
 $conexion->query($sql);
 
-// Mostrar la lista actualizada de usuarios
-$resultado = $conexion->query("SELECT * FROM usuarios");
 
-if ($resultado->num_rows > 0) {
-    while ($fila = $resultado->fetch_assoc()) {
-        echo "<p>" . htmlspecialchars($fila['nombre']) . 
-             " <button class='eliminar' data-id='" . $fila['id'] . "'>Eliminar</button></p>";
-    }
-}
 
 $conexion->close();
 ?>

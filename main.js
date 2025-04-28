@@ -14,12 +14,37 @@ document.getElementById('formulario').addEventListener('submit', function(e) {
         if (xhr.status == 200) {
             // Actualizar la lista de usuarios sin recargar la página
             document.getElementById('listaUsuarios').innerHTML = xhr.responseText;
-            document.getElementById('nombre').value = '';  // Limpiar el input
+            document.getElementById('nombre').value = '';
+              // Limpiar el input
         }
     };
 
     // Enviar los datos del formulario (nombre)
     xhr.send("nombre=" + nombre);
+});
+
+document.getElementById('formulario').addEventListener('submit', function(e) {
+    e.preventDefault();  // Evitar el envío tradicional
+
+    var password = document.getElementById('password').value;
+
+    // Crear el objeto AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "insertar.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    // Cuando la solicitud se complete
+    xhr.onload = function() {
+        if (xhr.status == 200) {
+            // Actualizar la lista de usuarios sin recargar la página
+            document.getElementById('listaUsuarios').innerHTML = xhr.responseText;
+            document.getElementById('password').value = '';
+              // Limpiar el input
+        }
+    };
+
+    // Enviar los datos del formulario (nombre)
+    xhr.send("password=" + password);
 });
 
 // Delegación de eventos para los botones de eliminar
