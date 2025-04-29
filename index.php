@@ -34,18 +34,18 @@ $conexion->close();
     <h1>Usuarios</h1>
     
     <form id="formulario">
-        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+        <input type="text" id="telefono" name="telefono" placeholder="Teléfono" required>
         <button type="submit">Agregar</button>
         
     </form>
 
-   
 
     <div id="listaUsuarios">
         <?php
         // Mostrar la lista de usuarios con el botón de eliminar
         foreach ($usuarios as $usuario) {
-            echo "<p>" . htmlspecialchars($usuario['nombre']) . 
+            echo "<p>" . htmlspecialchars($usuario['nombre'], $usuario['telefono']) . 
                  " <button class='eliminar' data-id='" . $usuario['id'] . "'>Eliminar</button></p>";
         }
         ?>
